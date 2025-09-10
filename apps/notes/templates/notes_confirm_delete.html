@@ -4,11 +4,11 @@
 
 {% block content %}
 
-    <a href="#">Voltar</a>
+    <a href="{% url "notes:list" %}">Voltar</a>
 
-    <h1>Tem certeza que deseja excluir essa anotação?</h1>
+    <h1>Tem certeza que deseja excluir essa anotação? ({{ note.title|truncatechars:20 }})</h1>
 
-    <p>Essa ação n]ao pode ser desfeita.</p>
+    <p>Essa ação não pode ser desfeita.</p>
 
     <form method="post">
         {% csrf_token %}

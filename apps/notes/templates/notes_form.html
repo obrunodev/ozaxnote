@@ -1,12 +1,22 @@
 {% extends "_base.html" %}
 
-{% block title %}Nova anotação{% endblock title %}
+{% block title %}
+    {% if form.instance.id %}
+        Editar anotação
+    {% else %}
+        Nova anotação
+    {% endif %}
+{% endblock title %}
 
 {% block content %}
 
-    <h1>Formulário de anotação</h1>
-
-    <p>Preencha o formulário para criar uma nova anotação</p>
+    <h1>
+        {% if form.instance.id %}
+            Editar anotação
+        {% else %}
+            Nova anotação
+        {% endif %}
+    </h1>
 
     <form method="post">
         {% csrf_token %}
