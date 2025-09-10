@@ -1,0 +1,23 @@
+{% extends "_base.html" %}
+
+{% block title %}Minhas anotações{% endblock title %}
+
+{% block content %}
+
+    <h1>Minhas anotações</h1>
+
+    <a href="{% url "notes:create" %}">Nova anotação</a>
+
+    <ul>
+        {% for note in notes %}
+            <li>
+                {{ note }} -
+                <a href="{% url "notes:update" note.id %}">Editar</a> -
+                <a href="{% url "notes:delete" note.id %}">Excluir</a>
+            </li>
+        {% empty %}
+            <li>Nenhuma anotação encontrada.</li>
+        {% endfor %}
+    </ul>
+
+{% endblock content %}

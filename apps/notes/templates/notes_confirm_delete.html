@@ -1,0 +1,18 @@
+{% extends "_base.html" %}
+
+{% block title %}Excluir anotação{% endblock title %}
+
+{% block content %}
+
+    <a href="#">Voltar</a>
+
+    <h1>Tem certeza que deseja excluir essa anotação?</h1>
+
+    <p>Essa ação n]ao pode ser desfeita.</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Confirmar</button>
+    </form>
+
+{% endblock content %}

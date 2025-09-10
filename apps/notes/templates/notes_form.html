@@ -1,0 +1,17 @@
+{% extends "_base.html" %}
+
+{% block title %}Nova anotação{% endblock title %}
+
+{% block content %}
+
+    <h1>Formulário de anotação</h1>
+
+    <p>Preencha o formulário para criar uma nova anotação</p>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Salvar</button>
+    </form>
+
+{% endblock content %}
