@@ -31,7 +31,8 @@ def notes_list(request):
 
 @login_required
 def notes_update(request, note_id):
-    note = get_object_or_404(Note, id=note_id)
+    note = get_object_or_404(Note, id=note_id, user=request.user)
+
     if request.method == 'GET':
         form = NoteForm(instance=note)
 
@@ -40,15 +41,18 @@ def notes_update(request, note_id):
         if form.is_valid():
             form.save()
             return redirect('notes:list')
+
     context = {'form': form}
     return render(request, 'notes_form.html', context)
 
 
 @login_required
 def notes_delete(request, note_id):
-    note = get_object_or_404(Note, id=note_id)
+    note = get_object_or_404(Note, id=note_id, user=request.user)
+
     if request.method == 'POST':
         note.delete()
         return redirect('notes:list')
+
     context = {'note': note}
     return render(request, 'notes_confirm_delete.html', context)
