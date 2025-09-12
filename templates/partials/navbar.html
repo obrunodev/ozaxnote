@@ -1,0 +1,8 @@
+<ul>
+    <li>
+        <form action="{% url "accounts:logout" %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Sair</button>
+        </form>
+    </li>
+</ul>

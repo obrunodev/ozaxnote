@@ -19,14 +19,14 @@ def notes_create(request):
             return redirect('notes:list')
 
     context = {'form': form}
-    return render(request, 'notes_form.html', context)
+    return render(request, 'notes/notes_form.html', context)
 
 
 @login_required
 def notes_list(request):
     notes = Note.objects.filter(user=request.user)
     context = {'notes': notes}
-    return render(request, 'notes_list.html', context)
+    return render(request, 'notes/notes_list.html', context)
 
 
 @login_required
@@ -43,7 +43,7 @@ def notes_update(request, note_id):
             return redirect('notes:list')
 
     context = {'form': form}
-    return render(request, 'notes_form.html', context)
+    return render(request, 'notes/notes_form.html', context)
 
 
 @login_required
@@ -55,4 +55,11 @@ def notes_delete(request, note_id):
         return redirect('notes:list')
 
     context = {'note': note}
-    return render(request, 'notes_confirm_delete.html', context)
+    return render(request, 'notes/notes_confirm_delete.html', context)
+
+
+@login_required
+def notes_detail(request, note_id):
+    note = get_object_or_404(Note, id=note_id)
+    context = {'note': note}
+    return render(request, 'notes/notes_detail.html', context)
