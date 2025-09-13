@@ -1,7 +1,9 @@
 from apps.notes.forms import NoteForm
 from apps.notes.models import Note
+from apps.shared.utils.pagination import paginate
 
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 
 
@@ -24,8 +26,13 @@ def notes_create(request):
 
 @login_required
 def notes_list(request):
-    notes = Note.objects.filter(user=request.user)
-    context = {'notes': notes}
+    query = request.GET.get('q', '')
+    notes = Note.objects.filter(
+        Q(title__icontains=query) | Q(content__icontains=query),
+        user=request.user,
+    )
+    page_obj = paginate(request, notes)
+    context = {'notes': page_obj}
     return render(request, 'notes/notes_list.html', context)
 
 
